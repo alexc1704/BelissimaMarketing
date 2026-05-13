@@ -212,11 +212,13 @@
     .demo-video {
       width: 100%;
       max-width: 950px;
+      height: 520px;
       border-radius: 24px;
       background: #000;
       box-shadow: 0 22px 60px rgba(138,35,71,0.18);
       overflow: hidden;
       display: block;
+      border: 0;
     }
 
     .mock-panel {
@@ -403,10 +405,12 @@
 
       <div class="demo-card">
         <div class="video-wrap">
-          <video class="demo-video" controls>
-            <source src="videos/account-demo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+          <iframe
+            class="demo-video"
+            src="https://drive.google.com/file/d/1r3jSjiucU8Lpke6k_dPNwZsUuL9p4KjO/preview"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
     </div>
@@ -430,41 +434,54 @@
 
       <div class="demo-card">
         <div class="video-wrap">
-          <video class="demo-video" controls>
-            <source src="videos/services.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+          <iframe
+            class="demo-video"
+            src="https://drive.google.com/file/d/1TJg_f06OVxSUFGQ2J28qyQyiI_ClcpK-/preview"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
     </div>
   </section>
 
   <section class="demo-section" id="ai">
-    <div class="demo-content">
-      <div class="demo-text">
-        <p class="section-label">Point-Based AI Matching</p>
-        <h2 class="section-title">AI scores providers by <em>user request</em></h2>
-        <p class="section-sub">
-          Belissima uses a point-based AI recommendation system instead of a star ranking system. The AI evaluates provider details against the user's request and recommends providers with the strongest fit.
-        </p>
+  <div class="demo-content">
+    <div class="demo-text">
+      <p class="section-label">Point-Based AI Matching</p>
+      <h2 class="section-title">AI scores providers by <em>user request</em></h2>
 
-        <div class="feature-list">
-          <div class="feature-item">Points are assigned based on matching service type, location, budget, availability, and preferences.</div>
-          <div class="feature-item">The AI recommendation is tailored to the request the user makes.</div>
-          <div class="feature-item">Users receive ranked suggestions that support faster decision-making.</div>
+      <p class="section-sub">
+        Allura helps users search more naturally by reading their prompt, identifying the main requirements, and turning those details into a smarter provider search.
+      </p>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          Users can type a request in everyday language, such as asking for a kid-friendly nail technician in Portmore or a makeup artist within a specific budget.
         </div>
-      </div>
 
-      <div class="demo-card">
-        <div class="video-wrap">
-          <video class="demo-video" controls>
-            <source src="videos/allura.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+        <div class="feature-item">
+          Allura reads the prompt and picks out the main requirements, including service type, location, price range, accessibility needs, payment method, and other important preferences.
+        </div>
+
+        <div class="feature-item">
+          After the main requirements are identified, users can add extra preferences to refine the search further, helping the system return more personalized provider recommendations.
         </div>
       </div>
     </div>
-  </section>
+
+    <div class="demo-card">
+      <div class="video-wrap">
+        <iframe
+          class="demo-video"
+          src="https://drive.google.com/file/d/13YVdWivXf-t3wM_xufVpsSXF9soFBM7N/preview"
+          allow="autoplay; fullscreen"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
 
   <section class="demo-section" id="provider">
     <div class="demo-content">
@@ -484,10 +501,12 @@
 
       <div class="demo-card">
         <div class="video-wrap">
-          <video class="demo-video" controls>
-            <source src="videos/provider.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+          <iframe
+            class="demo-video"
+            src="https://drive.google.com/file/d/1t-JmOTh5xpbv2cf_lsY_vZ8hI92xRY2k/preview"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
     </div>
@@ -517,7 +536,7 @@
     <div>
       <h3>COMPANY</h3>
       <ul>
-        <li><a href="marketing.html#about">About Us</a></li>
+        <li><a href="about_us.html">About Us</a></li>
         <li><a href="index.html">Create Account</a></li>
         <li><a href="marketing.html#features">Features</a></li>
       </ul>
