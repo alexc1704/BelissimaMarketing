@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belissima Demo — Feature Walkthrough</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&family=Cinzel:wght@400;600;700&family=Dancing+Script:wght@700&family=Playfair+Display+SC:wght@400;700;900&family=Reem+Kufi+Fun:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8f3f6;
+      --panel: #ffffff;
+      --text: #181114;
+      --muted: #6a5760;
+      --brand: #8a2347;
+      --brand-dark: #661731;
+      --soft: #efadc5;
+      --soft-2: #f8d0dd;
+      --border: #9c3e5c;
+      --shadow: 0 12px 32px rgba(111,29,57,0.12);
+      --warm: #f3ecef;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Chivo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 9999;
+      background: rgba(255,255,255,0.92);
+      color: var(--brand-dark);
+      border: 1px solid rgba(138,35,71,0.16);
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+      transition: all 0.25s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--brand);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      min-height: 70vh;
+      padding: 140px clamp(24px, 6vw, 80px) 80px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(248,243,246,0.97) 0%, rgba(255,248,250,0.9) 45%, rgba(255,248,250,0.2) 100%),
+        url("https://esmalteriacapricho.com.br/assets/img/esmaltaria-bg.jpg") center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 130px;
+      background: linear-gradient(to bottom, rgba(248,243,246,0), rgba(248,243,246,1));
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .logo-wrap img {
+      height: 120px;
+      width: auto;
+      display: block;
+    }
+
+    .section-label {
+      font-family: "Cinzel", serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: "Playfair Display SC", serif;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.05;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .section-title em {
+      font-family: "Dancing Script", cursive;
+      font-style: normal;
+      text-transform: none;
+      font-size: 1.15em;
+      color: var(--brand);
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .quick-nav {
+      margin-top: 34px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .quick-nav a,
+    .btn-primary {
+      background: var(--brand);
+      color: white;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: var(--shadow);
+      transition: all 0.22s ease;
+    }
+
+    .quick-nav a:hover,
+    .btn-primary:hover {
+      background: var(--brand-dark);
+      transform: translateY(-2px);
+    }
+
+    .demo-section {
+      padding: clamp(64px, 8vw, 110px) clamp(24px, 6vw, 80px);
+    }
+
+    .demo-section:nth-of-type(even) {
+      background: var(--warm);
+    }
+
+    .demo-content {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .demo-text {
+      max-width: 520px;
+    }
+
+    .demo-card {
+      background: white;
+      border: 1px solid rgba(156,62,92,0.18);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .video-wrap {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .demo-video {
+      width: 100%;
+      max-width: 950px;
+      border-radius: 24px;
+      background: #000;
+      box-shadow: 0 22px 60px rgba(138,35,71,0.18);
+      overflow: hidden;
+      display: block;
+    }
+
+    .mock-panel {
+      min-height: 300px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(239,173,197,0.6), transparent 30%),
+        linear-gradient(135deg, #ffffff, #f8d0dd);
+      padding: 28px;
+      display: grid;
+      gap: 14px;
+      align-content: center;
+    }
+
+    .mock-row {
+      background: white;
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 6px 20px rgba(138,35,71,0.08);
+      color: var(--brand-dark);
+      font-weight: 700;
+    }
+
+    .mock-tag {
+      background: var(--soft-2);
+      color: var(--brand);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.72rem;
+      white-space: nowrap;
+    }
+
+    .feature-list {
+      margin-top: 24px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .feature-item {
+      background: rgba(138,35,71,0.06);
+      border: 1px solid rgba(138,35,71,0.12);
+      border-radius: 18px;
+      padding: 14px 16px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+@media (max-width: 900px) {
+      .demo-content {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-text {
+        max-width: 100%;
+      }
+
+      .back-btn {
+        top: 16px;
+        left: 16px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .quick-nav {
+        flex-direction: column;
+      }
+
+      .quick-nav a {
+        width: 100%;
+      }
+
+      .logo-wrap img {
+        height: 95px;
+      }
+    }
+  
+    /* ── DASHBOARD-STYLE FOOTER ── */
+    .footer {
+      margin-top: clamp(36px, 6vw, 80px);
+      background: var(--brand-dark);
+      color: #fff6fa;
+      padding: 36px clamp(16px, 3vw, 32px);
+    }
+
+    .footer__inner {
+      width: min(100%, 1450px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .footer h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      font-family: "Cinzel", serif;
+      color: #fff6fa;
+    }
+
+    .footer p,
+    .footer li {
+      margin: 0;
+      color: rgba(255, 246, 250, 0.85);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .footer ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .footer a {
+      color: rgba(255, 246, 250, 0.9);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer a:hover {
+      color: #ffffff;
+    }
+
+    @media (max-width: 960px) {
+      .footer__inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer__inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <a href="marketing.html" class="back-btn">← Back to Marketing</a>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="logo-wrap">
+        <img src="belissima-logo.png" alt="Belissima by Bella's & Co">
+      </div>
+
+      <p class="section-label">Feature Demonstration</p>
+      <h1 class="section-title">See Belissima <em>in action</em></h1>
+      <p class="section-sub">
+        This demo page walks through the key parts of the Belissima experience:
+        account creation, smart searching, point-based AI recommendations, and provider profile discovery.
+      </p>
+
+      <div class="quick-nav">
+        <a href="#account">Create Account</a>
+        <a href="#search">Search & Filter</a>
+        <a href="#ai">AI Matching</a>
+        <a href="#provider">Provider Profiles</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="demo-section" id="account">
+    <div class="demo-content">
+      <div class="demo-text">
+        <p class="section-label">Account Creation</p>
+        <h2 class="section-title">Create your <em>Belissima account</em></h2>
+        <p class="section-sub">
+          Users can create an account, enter their details, and begin using Belissima to discover beauty providers that fit their preferences.
+        </p>
+
+        <div class="feature-list">
+          <div class="feature-item">Create a user account with basic personal details.</div>
+          <div class="feature-item">Store user preferences for a more personalized experience.</div>
+          <div class="feature-item">Access Belissima features after logging in.</div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="video-wrap">
+          <video class="demo-video" controls>
+            <source src="videos/account-demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo-section" id="search">
+    <div class="demo-content">
+      <div class="demo-text">
+        <p class="section-label">Search & Filter</p>
+        <h2 class="section-title">Find providers by <em>what matters</em></h2>
+        <p class="section-sub">
+          Users can search and filter beauty providers by service type, location, price range, availability, and preferences.
+        </p>
+
+        <div class="feature-list">
+          <div class="feature-item">Filter by services such as hair, nails, makeup, waxing, and brows.</div>
+          <div class="feature-item">Narrow results by location and provider details.</div>
+          <div class="feature-item">Make discovery faster than scrolling through scattered social media pages.</div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="video-wrap">
+          <video class="demo-video" controls>
+            <source src="videos/services.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo-section" id="ai">
+    <div class="demo-content">
+      <div class="demo-text">
+        <p class="section-label">Point-Based AI Matching</p>
+        <h2 class="section-title">AI scores providers by <em>user request</em></h2>
+        <p class="section-sub">
+          Belissima uses a point-based AI recommendation system instead of a star ranking system. The AI evaluates provider details against the user's request and recommends providers with the strongest fit.
+        </p>
+
+        <div class="feature-list">
+          <div class="feature-item">Points are assigned based on matching service type, location, budget, availability, and preferences.</div>
+          <div class="feature-item">The AI recommendation is tailored to the request the user makes.</div>
+          <div class="feature-item">Users receive ranked suggestions that support faster decision-making.</div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="video-wrap">
+          <video class="demo-video" controls>
+            <source src="videos/allura.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo-section" id="provider">
+    <div class="demo-content">
+      <div class="demo-text">
+        <p class="section-label">Provider Profiles</p>
+        <h2 class="section-title">Review details before <em>choosing</em></h2>
+        <p class="section-sub">
+          Each provider profile gives users helpful information such as services, pricing, contact links, policies, photos, location, and operating details.
+        </p>
+
+        <div class="feature-list">
+          <div class="feature-item">View provider photos and business information.</div>
+          <div class="feature-item">Check service type, location, pricing, and policies.</div>
+          <div class="feature-item">Save favourite providers for later comparison.</div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="video-wrap">
+          <video class="demo-video" controls>
+            <source src="videos/provider.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+  <div class="footer__inner">
+
+    <div>
+      <h3>BELISSIMA</h3>
+      <p>
+        Your one-stop hub for beauty services. Discover hairstylists,
+        nail technicians, make-up artists, and wax specialists near you.
+      </p>
+    </div>
+
+    <div>
+      <h3>SERVICES</h3>
+      <ul>
+        <li><a href="#search">Hairstylists</a></li>
+        <li><a href="#search">Wax Specialists</a></li>
+        <li><a href="#search">Make-up Artists</a></li>
+        <li><a href="#search">Nail Artists</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>COMPANY</h3>
+      <ul>
+        <li><a href="marketing.html#about">About Us</a></li>
+        <li><a href="index.html">Create Account</a></li>
+        <li><a href="marketing.html#features">Features</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>SUPPORT/CONTACT</h3>
+      <ul>
+        <li><a href="mailto:belissima3901@yahoo.com">belissima3901@yahoo.com</a></li>
+        <li><a href="marketing.html">Marketing Page</a></li>
+        <li><a href="demo.html">Demo Page</a></li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
